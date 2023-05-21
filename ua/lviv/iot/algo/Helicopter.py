@@ -2,7 +2,11 @@ class Helicopter:
     """
     this class succinctly describes the helicopter speed, the height of the remaining fuel
     """
-    def __init__(self, current_altitude, new_altitude, fuel_updated,
+    max_altitude = 100
+    id_is = 345
+    __instance = None
+
+    def __init__(self, current_altitude=1000, new_altitude=1000, fuel_updated=50,
                  id_is=100, max_altitude=1000, fuel_capacity=30,
                  current_fuel=10):
         """
@@ -24,6 +28,30 @@ class Helicopter:
         self.fuel_capacity = fuel_capacity
         self.current_fuel = current_fuel
 
+    def __str__(self):
+        return f"{self.current_altitude}, {self.new_altitude}," \
+               f" {self.fuel_updated}, {self.id_is}, " \
+               f"{self.max_altitude}, {self.fuel_capacity}, " \
+               f"{self.current_fuel}"
+
+    @staticmethod
+    def get_instance():
+        """
+        crate new odict
+        :return: __instance
+        """
+        if not Helicopter.__instance:
+            Helicopter.__instance = Helicopter()
+        return Helicopter.__instance
+
+    @staticmethod
+    def plys(a, b):
+        """
+        plys a + b
+        """
+        var = a + b
+        return var
+
     def ascend(self, altitude):
         """
         this method checks if the new height is not higher than
@@ -40,6 +68,10 @@ class Helicopter:
         print("Ascended to altitude", corrent_altitude)
 
     def take_off(self):
+        """
+        take off helicopter
+        :return: current_altitude
+        """
         self.current_altitude = 100
         print("Corrent altitude is", self.current_altitude)
 
@@ -74,8 +106,17 @@ class Helicopter:
 
 
 if __name__ == '__main__':
-    helicopter = Helicopter(1000, 1000, 50)
-    helicopter.refuel(15)
-    helicopter.descend(123)
-    helicopter.take_off()
-    helicopter.ascend(5000)
+    print(Helicopter.plys(5, 7))
+
+    hel_list = [
+        Helicopter(),
+        Helicopter(1000, 1000, 50, 150, 1500, 50, 20),
+        Helicopter.get_instance(),
+        Helicopter.get_instance(),
+    ]
+
+    for helicopter in hel_list:
+        print(helicopter)
+
+    numbers = [-1*x for x in range(21) if x % 2 != 0]
+    print(numbers)
