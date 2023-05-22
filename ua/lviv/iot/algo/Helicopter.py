@@ -1,4 +1,10 @@
-class Helicopter:
+"""
+import  AerialVehicle
+"""
+from ua.lviv.iot.algo.aerial_vehicle import AerialVehicle
+
+
+class Helicopter(AerialVehicle):
     """
     this class succinctly describes the helicopter speed, the height of the remaining fuel
     """
@@ -6,9 +12,10 @@ class Helicopter:
     id_is = 345
     __instance = None
 
-    def __init__(self, current_altitude=1000, new_altitude=1000, fuel_updated=50,
-                 id_is=100, max_altitude=1000, fuel_capacity=30,
-                 current_fuel=10):
+    def __init__(self, max_speed, manufacturer, max_flying_distance,
+                 max_delivery_weight, current_altitude=1000, name="Helicopter",
+                 new_altitude=1000, fuel_updated=50, id_is=100, max_altitude=1000,
+                 fuel_capacity=30, current_fuel=10):
         """
         In this method we add all the common fields of the application
         :param current_altitude: this field shows at what height the plane is at the moment
@@ -20,7 +27,9 @@ class Helicopter:
         :param current_fuel: this field fuel volume new
         """
 
+        super().__init__(max_speed, manufacturer, max_flying_distance, max_delivery_weight)
         self.id_is = id_is
+        self.name = name
         self.fuel_updated = fuel_updated
         self.current_altitude = current_altitude
         self.new_altitude = new_altitude
@@ -32,7 +41,7 @@ class Helicopter:
         return f"{self.current_altitude}, {self.new_altitude}," \
                f" {self.fuel_updated}, {self.id_is}, " \
                f"{self.max_altitude}, {self.fuel_capacity}, " \
-               f"{self.current_fuel}"
+               f"{self.current_fuel}, {self.name},"
 
     @staticmethod
     def get_instance():
@@ -41,7 +50,8 @@ class Helicopter:
         :return: __instance
         """
         if not Helicopter.__instance:
-            Helicopter.__instance = Helicopter()
+            Helicopter.__instance = Helicopter(1000, 1000, 50, 150, 1500,
+                                               "we is helicopter", 50, 20)
         return Helicopter.__instance
 
     @staticmethod
@@ -104,13 +114,28 @@ class Helicopter:
             self.current_fuel = self.fuel_updated
         print("fuel updated = ", self.current_fuel)
 
+    def get_max_delivery_weight(self):
+        """
+        this method takes the max delivery weight value
+         from the constructor
+        :return: max delivery weight
+        """
+        return self.max_delivery_weight
+
+    def get_max_flying_distance(self):
+        """
+        this method takes the max flying distance value
+         from the constructor
+        :return: max_flying_distance
+        """
+        return self.max_flying_distance
+
 
 if __name__ == '__main__':
     print(Helicopter.plys(5, 7))
 
     hel_list = [
-        Helicopter(),
-        Helicopter(1000, 1000, 50, 150, 1500, 50, 20),
+        Helicopter(1000, 1000, 50, 150, 1500, "we is helicopter", 50, 20),
         Helicopter.get_instance(),
         Helicopter.get_instance(),
     ]
@@ -118,5 +143,5 @@ if __name__ == '__main__':
     for helicopter in hel_list:
         print(helicopter)
 
-    numbers = [-1*x for x in range(21) if x % 2 != 0]
+    numbers = [-1 * x for x in range(21) if x % 2 != 0]
     print(numbers)
