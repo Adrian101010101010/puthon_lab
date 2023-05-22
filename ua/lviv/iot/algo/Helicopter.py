@@ -4,6 +4,7 @@ import  AerialVehicle
 from ua.lviv.iot.algo.aerial_vehicle import AerialVehicle
 
 
+
 class Helicopter(AerialVehicle):
     """
     this class succinctly describes the helicopter speed, the height of the remaining fuel
@@ -50,9 +51,9 @@ class Helicopter(AerialVehicle):
         :return: __instance
         """
         if not Helicopter.__instance:
-            Helicopter.__instance = Helicopter(1000, 1000, 50, 150, 1500,
+        Helicopter.__instance = Helicopter(1000, 1000, 50, 150, 1500,
                                                "we is helicopter", 50, 20)
-        return Helicopter.__instance
+
 
     @staticmethod
     def plys(a, b):
