@@ -1,4 +1,8 @@
-from ua.lviv.iot.algo.AerialVehicle import AerialVehicle
+"""
+class Plane
+"""
+# pylint: disable=import-error
+from ua.lviv.iot.algo.aerial_vehicle import AerialVehicle
 
 
 class Plane(AerialVehicle):
@@ -6,8 +10,9 @@ class Plane(AerialVehicle):
     this class describes a Plane
     """
 
+    # pylint: disable=too-many-arguments
     def __init__(self, new_speed, speed_now, max_speed, manufacturer,
-                 max_flying_distance, max_delivery_weight, name="Plane"):
+                 max_flying_distance, max_delivery_weight, octane_number, name="Plane"):
         """
         :type name: this parameter shows name
         :param new_speed: this parameter shows new speed
@@ -18,13 +23,14 @@ class Plane(AerialVehicle):
         :param max_delivery_weight: this parameter shows max delivery weight
         """
         super().__init__(max_speed, manufacturer, max_flying_distance,
-                         max_delivery_weight)
+                         max_delivery_weight, octane_number)
         self.new_speed = new_speed
         self.speed_now = speed_now
         self.name = name
+        self.octane_number = octane_number
 
     def __str__(self):
-        return f"{self.name}"
+        return f"{self.name}, {self.new_speed}, {self.speed_now}"
 
     def fast(self, acceleration):
         """
@@ -34,6 +40,8 @@ class Plane(AerialVehicle):
         :param acceleration: this parameter show by how much the speed increased
         :return: acceleration
         """
+        # pylint: disable=attribute-defined-outside-init
+        # pylint: disable=access-member-before-definition
         self.new_speed = self.speed_now + acceleration
         if self.new_speed > self.max_speed:
             self.new_speed = self.max_speed
@@ -54,3 +62,10 @@ class Plane(AerialVehicle):
         :return: max delivery weight
         """
         return self.max_delivery_weight
+
+    def fly(self):
+        """
+
+        :return: string
+        """
+        return "flies like an f 777"

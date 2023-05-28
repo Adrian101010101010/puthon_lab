@@ -1,10 +1,11 @@
 """
 import  AerialVehicle
 """
+# pylint: disable=import-error
 from ua.lviv.iot.algo.aerial_vehicle import AerialVehicle
 
 
-
+# pylint: disable=too-many-instance-attributes
 class Helicopter(AerialVehicle):
     """
     this class succinctly describes the helicopter speed, the height of the remaining fuel
@@ -13,7 +14,8 @@ class Helicopter(AerialVehicle):
     id_is = 345
     __instance = None
 
-    def __init__(self, max_speed, manufacturer, max_flying_distance,
+    # pylint: disable=too-many-arguments
+    def __init__(self, max_speed, manufacturer, max_flying_distance, octane_number,
                  max_delivery_weight, current_altitude=1000, name="Helicopter",
                  new_altitude=1000, fuel_updated=50, id_is=100, max_altitude=1000,
                  fuel_capacity=30, current_fuel=10):
@@ -28,7 +30,8 @@ class Helicopter(AerialVehicle):
         :param current_fuel: this field fuel volume new
         """
 
-        super().__init__(max_speed, manufacturer, max_flying_distance, max_delivery_weight)
+        super().__init__(max_speed, manufacturer, max_flying_distance, max_delivery_weight,
+                         octane_number)
         self.id_is = id_is
         self.name = name
         self.fuel_updated = fuel_updated
@@ -37,6 +40,7 @@ class Helicopter(AerialVehicle):
         self.max_altitude = max_altitude
         self.fuel_capacity = fuel_capacity
         self.current_fuel = current_fuel
+        self.octane_number = octane_number
 
     def __str__(self):
         return f"{self.current_altitude}, {self.new_altitude}," \
@@ -51,10 +55,11 @@ class Helicopter(AerialVehicle):
         :return: __instance
         """
         if not Helicopter.__instance:
-        Helicopter.__instance = Helicopter(1000, 1000, 50, 150, 1500,
-                                               "we is helicopter", 50, 20)
+            Helicopter.__instance = Helicopter(1000, 1000, 50, 150, 1500,
+                                               100, "we is helicopter", 50, 20)
+        return Helicopter.__instance
 
-
+    # pylint: disable=invalid-name
     @staticmethod
     def plys(a, b):
         """
@@ -131,12 +136,19 @@ class Helicopter(AerialVehicle):
         """
         return self.max_flying_distance
 
+    def fly(self):
+        """
+
+        :return: string
+        """
+        return "flies like an I"
+
 
 if __name__ == '__main__':
     print(Helicopter.plys(5, 7))
 
     hel_list = [
-        Helicopter(1000, 1000, 50, 150, 1500, "we is helicopter", 50, 20),
+        Helicopter(1000, 1000, 50, 150, 1500, 100, "we is helicopter",  346, 50, 20),
         Helicopter.get_instance(),
         Helicopter.get_instance(),
     ]
