@@ -1,4 +1,4 @@
-from ua.lviv.iot.algo.aerial_vehicle import AerialVehicle
+from ua.lviv.iot.algo.AerialVehicle import AerialVehicle
 
 
 class Plane(AerialVehicle):
@@ -24,7 +24,7 @@ class Plane(AerialVehicle):
         self.name = name
 
     def __str__(self):
-        return f"{self.name}, {self.new_speed}, {self.speed_now}"
+        return f"{self.name}"
 
     def fast(self, acceleration):
         """

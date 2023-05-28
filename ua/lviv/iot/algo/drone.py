@@ -1,13 +1,11 @@
-"""
-import AerialVehicle
-"""
-from ua.lviv.iot.algo.aerial_vehicle import AerialVehicle
+from ua.lviv.iot.algo.AerialVehicle import AerialVehicle
 
 
 class Drone(AerialVehicle):
     """
     this class describes a Drone
     """
+
     def __init__(self, battery_capacity, charge_consumption_per_minute_of_flight,
                  speed, max_speed, manufacturer,
                  max_flying_distance, max_delivery_weight, name="Drone"):
@@ -25,10 +23,6 @@ class Drone(AerialVehicle):
         super().__init__(max_speed, manufacturer, max_flying_distance, max_delivery_weight)
         self.new_speed = None
         self.name = name
-        self.max_speed = max_speed
-        self.manufacturer = manufacturer
-        self.max_flying_distance = max_flying_distance
-        self.max_delivery_weight = max_delivery_weight
         self.speed = speed
         self.battery_capacity = battery_capacity
         self.charge_consumption_per_minute_of_flight = charge_consumption_per_minute_of_flight
