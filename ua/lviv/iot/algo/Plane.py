@@ -3,12 +3,17 @@ class Plane
 """
 # pylint: disable=import-error
 from ua.lviv.iot.algo.aerial_vehicle import AerialVehicle
+from ua.lviv.iot.algo.redundant_excessive_cargo_weight import RedundantExcessiveCargoWeight
+from ua.lviv.iot.algo.redundant_excessive_cargo_weight import logged
 
 
 class Plane(AerialVehicle):
     """
     this class describes a Plane
     """
+
+    load_capacity = 1000
+    mass_of_the_cargo = None
 
     # pylint: disable=too-many-arguments
     def __init__(self, new_speed, speed_now, max_speed, manufacturer,
@@ -69,3 +74,27 @@ class Plane(AerialVehicle):
         :return: string
         """
         return "flies like an f 777"
+
+    def loading_of_transport(self, mass_of_the_cargo):
+        """
+        this method tells how many planes are loaded or overloaded
+        :param mass_of_the_cargo: this value shows the mass of the cargo
+        :return: mass_of_the_cargo
+        """
+        self.mass_of_the_cargo = mass_of_the_cargo
+        if mass_of_the_cargo < self.load_capacity:
+            self.mass_of_the_cargo = mass_of_the_cargo
+        else:
+            self.mass_of_the_cargo = self.load_capacity
+        try:
+            raise RedundantExcessiveCargoWeight("Excessive cargo weight detected.")
+        except RedundantExcessiveCargoWeight as ex:
+            print(ex)
+
+    @logged(RedundantExcessiveCargoWeight, mode="file")
+    def cargo(self):
+        """
+        this method looks for errors in class
+        :return:
+        """
+        self.loading_of_transport(1500)
