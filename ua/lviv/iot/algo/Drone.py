@@ -1,14 +1,20 @@
-from ua.lviv.iot.algo.AerialVehicle import AerialVehicle
+"""
+import AerialVehicle
+"""
+# pylint: disable=import-error
+from ua.lviv.iot.algo.aerial_vehicle import AerialVehicle
 
 
+# pylint: disable=too-many-instance-attributes
 class Drone(AerialVehicle):
     """
     this class describes a Drone
     """
 
+    # pylint: disable=too-many-arguments
     def __init__(self, battery_capacity, charge_consumption_per_minute_of_flight,
                  speed, max_speed, manufacturer,
-                 max_flying_distance, max_delivery_weight, name="Drone"):
+                 max_flying_distance, max_delivery_weight, octane_number, name="Drone"):
         """
 
         :param battery_capacity: this parameter shows battery capacity
@@ -19,11 +25,18 @@ class Drone(AerialVehicle):
         :param manufacturer: this parameter shows manufacturer
         :param max_flying_distance: this parameter shows max flying distance
         :param max_delivery_weight: this parameter shows max delivery weight
+        :param octane_number: this parameter shows octane number
         """
-        super().__init__(max_speed, manufacturer, max_flying_distance, max_delivery_weight)
+        super().__init__(max_speed, manufacturer, max_flying_distance, max_delivery_weight,
+                         octane_number)
         self.new_speed = None
         self.name = name
+        self.max_speed = max_speed
+        self.manufacturer = manufacturer
+        self.max_flying_distance = max_flying_distance
+        self.max_delivery_weight = max_delivery_weight
         self.speed = speed
+        self.octane_number = octane_number
         self.battery_capacity = battery_capacity
         self.charge_consumption_per_minute_of_flight = charge_consumption_per_minute_of_flight
 
@@ -61,3 +74,10 @@ class Drone(AerialVehicle):
         :return: max delivery weight
         """
         return self.max_delivery_weight
+
+    def fly(self):
+        """
+
+        :return: string
+        """
+        return "flies like an f 16"

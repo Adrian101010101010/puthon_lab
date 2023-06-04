@@ -1,3 +1,7 @@
+"""
+class MilitaryDrone
+"""
+# pylint: disable=import-error
 from ua.lviv.iot.algo.aerial_vehicle import AerialVehicle
 
 
@@ -5,10 +9,14 @@ class MilitaryDrone(AerialVehicle):
     """
     this class describes a MilitaryDrone
     """
+
+    # pylint: disable=too-many-arguments
     def __init__(self, max_speed, manufacturer, max_flying_distance,
-                 max_delivery_weight, name="MilitaryDrone"):
-        super().__init__(max_speed, manufacturer, max_flying_distance, max_delivery_weight)
+                 max_delivery_weight, octane_number, name="MilitaryDrone"):
+        super().__init__(max_speed, manufacturer, max_flying_distance, max_delivery_weight,
+                         octane_number)
         self.name = name
+        self.octane_number = octane_number
 
     def __str__(self):
         return f"{self.name}"
@@ -42,3 +50,10 @@ class MilitaryDrone(AerialVehicle):
         :return: max delivery weight
         """
         return self.max_delivery_weight
+
+    def fly(self):
+        """
+
+        :return: string
+        """
+        return "flies like an f 19"
