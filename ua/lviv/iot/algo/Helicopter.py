@@ -149,6 +149,7 @@ class Helicopter(AerialVehicle):
         """
         return "flies like an I"
 
+    @logged(RedundantExcessiveCargoWeight, mode="file")
     def loading_of_transport(self, mass_of_the_cargo):
         """
         this method tells how many planes are loaded or overloaded
@@ -160,30 +161,18 @@ class Helicopter(AerialVehicle):
             self.mass_of_the_cargo = mass_of_the_cargo
         else:
             self.mass_of_the_cargo = self.load_capacity
-        try:
-            raise RedundantExcessiveCargoWeight("Excessive cargo weight detected.")
-        except RedundantExcessiveCargoWeight as ex:
-            print(ex)
 
-    @logged(RedundantExcessiveCargoWeight, mode="file")
-    def cargo(self):
-        """
-        this method looks for errors in class
-        :return:
-        """
-        logging.info("Loading cargo...")
-        self.loading_of_transport(2050)
-        logging.info("Cargo loaded successfully.")
+            raise RedundantExcessiveCargoWeight("Excessive cargo weight detected.")
 
 
 if __name__ == '__main__':
 
-    h = Helicopter(1000, 1000, 50, 150, 1500, 100, "we is helicopter",  346, 50, 20)
-    h.cargo()
+    h = Helicopter(1000, 1000, 50, 150, 1500, 100, "we is helicopter", 346, 50, 20)
+    h.loading_of_transport(521444)
     print(Helicopter.plays(5, 7))
 
     hel_list = [
-        Helicopter(1000, 1000, 50, 150, 1500, 100, "we is helicopter",  346, 50, 20),
+        Helicopter(1000, 1000, 50, 150, 1500, 100, "we is helicopter", 346, 50, 20),
         Helicopter.get_instance(),
         Helicopter.get_instance(),
     ]

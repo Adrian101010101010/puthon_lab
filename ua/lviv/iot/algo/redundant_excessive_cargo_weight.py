@@ -37,9 +37,12 @@ def logged(exception, mode="file"):
             :param kwargs:
             :return:
             """
+
             try:
+
                 return func(*args, **kwargs)
             except exception as ex:
+
                 logger = logging.getLogger(__name__)
                 if mode == "console":
                     handler = logging.StreamHandler()
@@ -49,7 +52,8 @@ def logged(exception, mode="file"):
                     return None
 
                 if mode == "file":
-                    handler = logging.FileHandler("log.csv")
+                    print("ityufytf")
+                    handler = logging.FileHandler("result.txt", mode='w')
                     formatter = logging.Formatter("%(asctime)s,%(levelname)s,%(message)s",
                                                   "%Y-%m-%d %H:%M:%S")
                     handler.setFormatter(formatter)

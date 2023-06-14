@@ -63,6 +63,7 @@ class MilitaryDrone(AerialVehicle):
         """
         return "flies like an f 19"
 
+    @logged(RedundantExcessiveCargoWeight, mode="file")
     def loading_of_transport(self, mass_of_the_cargo):
         """
         this method tells how many planes are loaded or overloaded
@@ -74,15 +75,6 @@ class MilitaryDrone(AerialVehicle):
             self.mass_of_the_cargo = mass_of_the_cargo
         else:
             self.mass_of_the_cargo = self.load_capacity
-        try:
-            raise RedundantExcessiveCargoWeight("Excessive cargo weight detected.")
-        except RedundantExcessiveCargoWeight as ex:
-            print(ex)
 
-    @logged(RedundantExcessiveCargoWeight, mode="file")
-    def cargo(self):
-        """
-        this method looks for errors in class
-        :return:
-        """
-        self.loading_of_transport(1001)
+            raise RedundantExcessiveCargoWeight("Excessive cargo weight detected.")
+
