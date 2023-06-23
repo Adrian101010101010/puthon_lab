@@ -35,8 +35,7 @@ class SetManager:
         raise IndexError("Index out of range"),
 
     def __next__(self):
-        """
-
-        :return:
-        """
-        return next(iter(self))
+        for obj in self.regular_manager:
+            for item in obj:
+                return item
+        raise StopIteration

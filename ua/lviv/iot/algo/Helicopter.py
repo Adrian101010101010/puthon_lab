@@ -2,7 +2,12 @@
 import  AerialVehicle
 """
 # pylint: disable=import-error
+import logging
 from ua.lviv.iot.algo.aerial_vehicle import AerialVehicle
+from ua.lviv.iot.algo.redundant_excessive_cargo_weight import RedundantExcessiveCargoWeight
+from ua.lviv.iot.algo.redundant_excessive_cargo_weight import logged
+
+logging.basicConfig(level=logging.INFO, handlers=[logging.StreamHandler()])
 
 
 # pylint: disable=too-many-instance-attributes
@@ -13,6 +18,8 @@ class Helicopter(AerialVehicle):
     max_altitude = 100
     id_is = 345
     __instance = None
+    load_capacity = 1000
+    mass_of_the_cargo = None
 
     # pylint: disable=too-many-arguments
     def __init__(self, max_speed, manufacturer, max_flying_distance, octane_number,
@@ -61,9 +68,9 @@ class Helicopter(AerialVehicle):
 
     # pylint: disable=invalid-name
     @staticmethod
-    def plys(a, b):
+    def plays(a, b):
         """
-        plys a + b
+        plays a + b
         """
         var = a + b
         return var
@@ -138,17 +145,34 @@ class Helicopter(AerialVehicle):
 
     def fly(self):
         """
-
         :return: string
         """
         return "flies like an I"
 
+    @logged(RedundantExcessiveCargoWeight, mode="file")
+    def loading_of_transport(self, mass_of_the_cargo):
+        """
+        this method tells how many planes are loaded or overloaded
+        :param mass_of_the_cargo: this value shows the mass of the cargo
+        :return: mass_of_the_cargo
+        """
+        self.mass_of_the_cargo = mass_of_the_cargo
+        if mass_of_the_cargo < self.load_capacity:
+            self.mass_of_the_cargo = mass_of_the_cargo
+        else:
+            self.mass_of_the_cargo = self.load_capacity
+
+            raise RedundantExcessiveCargoWeight("Excessive cargo weight detected.")
+
 
 if __name__ == '__main__':
-    print(Helicopter.plys(5, 7))
+
+    h = Helicopter(1000, 1000, 50, 150, 1500, 100, "we is helicopter", 346, 50, 20)
+    h.loading_of_transport(521444)
+    print(Helicopter.plays(5, 7))
 
     hel_list = [
-        Helicopter(1000, 1000, 50, 150, 1500, 100, "we is helicopter",  346, 50, 20),
+        Helicopter(1000, 1000, 50, 150, 1500, 100, "we is helicopter", 346, 50, 20),
         Helicopter.get_instance(),
         Helicopter.get_instance(),
     ]
